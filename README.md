@@ -1,18 +1,22 @@
-The Empathy Engine (Core Solution) 
+# The Empathy Engine (Core Solution) 
 A quick-turnaround prototype for the Challenge 1: The Empathy Engine hackathon, 
 focusing on delivering all Core Functional Requirements using a simple, self-contained 
 Python/Flask stack. 
-Core Solution Details 
-This solution successfully implements all five Must-Have requirements: 
+
+#### Core Solution Details 
+##### This solution successfully implements all five Must-Have requirements: 
 Requirement 
-1. Text Input 
+1. Text Input
+
 2. Emotion Detection 
-3. Vocal Modulation (2 
-Params) 
-4. Emotion-to-Voice 
-Mapping 
+
+3. Vocal Modulation (2 Params) 
+
+4. Emotion-to-Voice Mapping 
+
 5. Audio Output 
-Implementation 
+
+## Implementation 
 Provided via a simple Flask web form. 
 Uses the VADER sentiment library to classify text into Positive, 
 Negative, and Neutral categories. 
@@ -20,11 +24,15 @@ Modulates the Rate (speed) and Volume of the TTS output.
 A clear, demonstrable logic is implemented in app.py. 
 Generates a playable .mp3 file using the offline pyttsx3 
 engine. 
-Setup and Deployment Instructions 
+
+
+## Setup and Deployment Instructions 
 This application is designed to run locally using the provided files. 
-1. Folder Structure 
+### 1. Folder Structure 
 Ensure your file structure matches this layout: 
+
 empathy-engine/ 
+
 ├── app.py 
 ├── requirements.txt 
 ├── README.md 
