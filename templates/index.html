@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Empathy Engine</title>
+    <!-- Load Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-2xl bg-white shadow-xl rounded-xl p-8 space-y-8">
+        <!-- Header -->
+        <header class="text-center border-b pb-4">
+            <h1 class="text-4xl font-bold text-gray-800">🎙️ The Empathy Engine</h1>
+            <p class="text-gray-500 mt-2">Emotional TTS Prototype (Hackathon Core Solution)</p>
+        </header>
+
+        <!-- Main Form -->
+        <form method="POST" action="/" class="space-y-6">
+            <div>
+                <label for="text_input" class="block text-lg font-medium text-gray-700 mb-2">Enter Text for Synthesis</label>
+                <textarea 
+                    id="text_input" 
+                    name="text_input" 
+                    rows="4" 
+                    class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150" 
+                    placeholder="e.g., 'We have great news! We have approved your application, and you can start today.'" 
+                    required>{{ request.form.text_input if request.form.text_input else '' }}</textarea>
+            </div>
+            
+            <button type="submit" class="w-full flex items-center justify-center px-6 py-3 border border-transparent text-lg font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 shadow-md transition duration-150">
+                Analyze Emotion & Generate Speech
+            </button>
+        </form>
+
+        <!-- Results Area -->
+        {% if audio_url %}
+        <div class="space-y-4 pt-6 border-t border-gray-200">
+            <h2 class="text-2xl font-semibold text-gray-800">Synthesis Result</h2>
+            
+            <!-- Emotion Detection Output -->
+            <div class="p-4 bg-indigo-50 border-l-4 border-indigo-500 text-indigo-800 rounded-lg shadow-sm">
+                <p class="font-bold text-lg">Detected Emotion:</p>
+                <p class="text-xl mt-1">{{ emotion_text }}</p>
+                <p class="text-sm mt-2 text-indigo-600">The parameters were dynamically adjusted based on this classification.</p>
+            </div>
+
+            <!-- Audio Output (Must-Have 5) -->
+            <div class="bg-gray-100 p-4 rounded-lg shadow-inner">
+                <p class="font-medium text-gray-700 mb-2">Playable Audio Output:</p>
+                <audio controls class="w-full rounded-lg">
+                    <source src="{{ audio_url }}" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        </div>
+        {% elif emotion_text and 'Error' in emotion_text %}
+        <div class="space-y-4 pt-6 border-t border-gray-200">
+            <h2 class="text-2xl font-semibold text-red-600">Synthesis Error</h2>
+            <div class="p-4 bg-red-50 border-l-4 border-red-500 text-red-800 rounded-lg shadow-sm">
+                <p class="font-bold text-lg">Details:</p>
+                <p class="mt-1">{{ emotion_text }}</p>
+                <p class="text-sm mt-2 text-red-600">This often occurs with offline TTS engines on unsupported systems.</p>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
