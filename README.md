@@ -34,49 +34,71 @@ Ensure your file structure matches this layout:
 empathy-engine/ 
 
 ├── app.py 
+
 ├── requirements.txt 
+
 ├── README.md 
+
 ├── static/ 
+
 │   └── audio/  <- (Automatically created by app.py) 
+
 └── templates/ 
+
 └── index.html 
-2. Environment Setup 
+
+### 2. Environment Setup 
+
 Create a Virtual Environment (Recommended): 
+
 python -m venv venv 
+
 source venv/bin/activate  # On Windows: venv\Scripts\activate 
-1.  
-Install Dependencies: 
+
+#### 1.  Install Dependencies: 
+
 pip install -r requirements.txt 
-3. Run the Application 
+
+#### 2. Run the Application 
+
 python app.py 
-1. Access the Interface: Open your browser and navigate to the address shown 
+
+#### 3. Access the Interface: Open your browser and navigate to the address shown 
 (usually http://127.0.0.1:5000/). 
+
 Design Choices: Emotion Mapping Logic  
-Detected Emotion (VADER 
-Score) 
+
+Detected Emotion (VADER Score) 
+
 Positive (Score > 0.2) 
+
 Contextual Goal 
-Enthusiasm/Excitem
- ent 
+
+Enthusiasm/Excitement 
+
 Negative (Score < -0.2) 
-Neutral (Score between -0.2 & 
-0.2) 
-Seriousness/Patienc
- e 
+
+Neutral (Score between -0.2 & 0.2) 
+
+Seriousness/Patience 
+
 Rate (WPM) 
+
 200 (Fast) 
+
 120 (Slow) 
-Information Transfer 150 
-(Standard) 
-●  
+
+Information Transfer 150 (Standard) 
+
 Volume 
 (0.0-1.0) 
 1.0 (Max) 
-1.0 (Max) 
-1.0 (Max) 
+
 Positive: A faster rate conveys excitement and energy for good news. 
-● Negative: A slower, measured rate is used to convey patience and a calm, serious 
+
+Negative: A slower, measured rate is used to convey patience and a calm, serious 
 tone when addressing a customer's frustration (avoiding an angry or rushing voice). 
-● Rate & Volume Parameters: The solution uses Rate (words per minute) and 
+
+Rate & Volume Parameters: The solution uses Rate (words per minute) and 
 Volume (amplitude) as the two distinct vocal parameters that are programmatically 
 altered based on the detected emotion.
